@@ -1,18 +1,76 @@
 import React, { useState } from 'react';
 import { ArrowUp, ArrowLeft, ArrowRight, ArrowDown, X } from 'lucide-react';
 
-const backgrounds = [
-  '/main_entrance.png',
-  '/api/placeholder/1920/1080',
-  '/api/placeholder/1920/1080',
-  '/api/placeholder/1920/1080',
-  '/api/placeholder/1920/1080',
-];
+
+
+let upstairs_left_final = {
+  image: '/upstairs_left_final.png',
+  down: {},
+}
+
+let upstairs_right_final = {
+  image: '/upstairs_right_final.png',
+  down: '',
+}
+
+let upstairs_landing = {
+  image: '/upstairs_landing.png',
+  down: '',
+  right: upstairs_right_final,
+  left: upstairs_left_final
+}
+
+
+let downstairs_left_final = {
+  image: '/downstairs_left_final.png',
+  down: '',
+}
+let downstairs_right_final = {
+  image: '/downstairs_right_final.png',
+  down: '',
+}
+let downstairs_landing = {
+  image: '/downstairs_landing.png',
+  down: '',
+  right: downstairs_right_final,
+  left: downstairs_left_final
+}
+
+
+let main_left_final = {
+  image: '/main_left_final.png',
+  down: '',
+}
+
+let main_right_final = {
+  image: '/main_right_final.png',
+  down: '',
+}
+
+const main_landing = {
+  image: '/main_entrance.png',
+  down: downstairs_landing,
+  up: upstairs_landing,
+  right: main_right_final,
+  left: main_left_final
+}
+
+upstairs_left_final.down = upstairs_landing
+upstairs_right_final.down = upstairs_landing
+
+main_right_final.down = main_landing
+main_left_final.down = main_landing
+
+downstairs_right_final = downstairs_landing
+downstairs_left_final.down = downstairs_landing
+
+upstairs_landing.down = main_landing
+downstairs_left_final.down = main_landing
 
 export default function ProposalGame() {
   const [password, setPassword] = useState('');
   const [stage, setStage] = useState(0);
-  const [backgroundIndex, setBackgroundIndex] = useState(0);
+  const [background, setBackground] = useState(main_landing);
   const [showTreasure, setShowTreasure] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
@@ -23,29 +81,18 @@ export default function ProposalGame() {
     }
   };
 
-  const handleArrowClick = (direction) => {
-    let newIndex = backgroundIndex;
-    switch (direction) {
-      case 'left':
-        newIndex = (backgroundIndex - 1 + backgrounds.length) % backgrounds.length;
-        break;
-      case 'right':
-        newIndex = (backgroundIndex + 1) % backgrounds.length;
-        break;
-      case 'up':
-        newIndex = (backgroundIndex + 2) % backgrounds.length;
-        break;
-      case 'down':
-        newIndex = (backgroundIndex + 3) % backgrounds.length;
-        break;
-    }
-    setBackgroundIndex(newIndex);
-    setShowTreasure(newIndex === 2);
+  const handleArrowClick = (background) => {
+    setBackground(background)
+
+    // setShowTreasure(newIndex === 2);
   };
 
   const CustomDialog = ({ isOpen, onClose, children }) => {
     if (!isOpen) return null;
-    
+
+
+
+
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
         <div className="bg-white rounded-lg p-6 max-w-sm w-full">
@@ -85,37 +132,54 @@ export default function ProposalGame() {
   //   );
   // }
 
-  console.log(backgrounds[backgroundIndex])
+  console.log(background.image)
 
   return (
-    <div 
+    <div
       className="h-screen w-screen bg-cover bg-center flex items-center justify-center"
-      style={{ backgroundImage: `url(${backgrounds[backgroundIndex]})` }}
+      style={{ backgroundImage: `url(${background.image})` }}
     >
-      <div className="fixed top-1/2 left-4">
-        <button onClick={() => handleArrowClick('left')} className="text-white p-2 bg-black bg-opacity-50 rounded-full">
-          <ArrowLeft size={24} />
-        </button>
-      </div>
-      <div className="fixed top-1/2 right-4">
-        <button onClick={() => handleArrowClick('right')} className="text-white p-2 bg-black bg-opacity-50 rounded-full">
-          <ArrowRight size={24} />
-        </button>
-      </div>
-      <div className="fixed top-4 left-1/2 transform -translate-x-1/2">
-        <button onClick={() => handleArrowClick('up')} className="text-white p-2 bg-black bg-opacity-50 rounded-full">
-          <ArrowUp size={24} />
-        </button>
-      </div>
+      {
+        background.left &&
+        <div className="fixed top-1/2 left-4">
+          <button onClick={() => handleArrowClick(background.left)} className="text-white p-2 bg-black bg-opacity-50 rounded-full">
+            <ArrowLeft size={24} />
+          </button>
+        </div>
+      }
 
-      <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2">
-        <button onClick={() => handleArrowClick('up')} className="text-white p-2 bg-black bg-opacity-50 rounded-full">
-          <ArrowDown size={24} />
-        </button>
-      </div>
+      {
+        background.right &&
+
+        <div className="fixed top-1/2 right-4">
+          <button onClick={() => handleArrowClick(background.right)} className="text-white p-2 bg-black bg-opacity-50 rounded-full">
+            <ArrowRight size={24} />
+          </button>
+        </div>
+      }
+
+
+      {
+        background.up &&
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2">
+          <button onClick={() => handleArrowClick(background.up)} className="text-white p-2 bg-black bg-opacity-50 rounded-full">
+            <ArrowUp size={24} />
+          </button>
+        </div>
+      }
+
+
+      {
+        background.down &&
+        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2">
+          <button onClick={() => handleArrowClick(background.down)} className="text-white p-2 bg-black bg-opacity-50 rounded-full">
+            <ArrowDown size={24} />
+          </button>
+        </div>
+      }
       {showTreasure && (
-        <button 
-          onClick={() => setShowPopup(true)} 
+        <button
+          onClick={() => setShowPopup(true)}
           className="bg-yellow-500 p-4 rounded-lg shadow-lg hover:bg-yellow-600 transition-colors"
         >
           Open Treasure Chest
@@ -124,7 +188,7 @@ export default function ProposalGame() {
       <CustomDialog isOpen={showPopup} onClose={() => setShowPopup(false)}>
         <h2 className="text-2xl font-bold mb-4">You've found the treasure!</h2>
         <p className="mb-4">
-          Congratulations! You've solved the mystery and found the ring. 
+          Congratulations! You've solved the mystery and found the ring.
           Will you marry me?
         </p>
       </CustomDialog>
