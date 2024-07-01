@@ -1,8 +1,17 @@
-# React + Vite
+# Proposal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+I'm proposing to Laura on July 4th, 2024, and as a builder at heart, I'm doing it the only way I know how: programmatically.
 
-Currently, two official plugins are available:
+Her favorite game growing up was the Nancy Drew series, so we'll be recreating an experience inspired by it. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Flow of the game:
+
+1) Initial screen with a password that she will have to find 
+2) Screens with 3 nav buttons where the background image will be areas in our house to navigate and find other clues 
+
+
+# How
+
+Vite + react(javascript - no one has time to deal with types for a project like this )
+
+Claude - Will be utilizing the AI overlords to see what they have to offer on assitance for this
