@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowUp, ArrowLeft, ArrowRight, ArrowDown, X } from 'lucide-react';
+import { ArrowUp, ArrowLeft, ArrowRight, ArrowDown, SearchCheck, X } from 'lucide-react';
 
 
 
@@ -177,13 +177,13 @@ export default function ProposalGame() {
           </button>
         </div>
       }
-      {showTreasure && (
-        <button
-          onClick={() => setShowPopup(true)}
-          className="bg-yellow-500 p-4 rounded-lg shadow-lg hover:bg-yellow-600 transition-colors"
-        >
-          Open Treasure Chest
-        </button>
+      {background.image == '/downstairs_left_final.png' && (
+        <div className='fixed top-4 right-4'>
+          <button onClick={() => alert('Any sleuth worth their salt would have tools. I would start by investigating this room.')} className=" text-white p-2 bg-black bg-opacity-50 rounded-full">
+            <SearchCheck size={100} />
+          </button>
+        </div>
+
       )}
       <CustomDialog isOpen={showPopup} onClose={() => setShowPopup(false)}>
         <h2 className="text-2xl font-bold mb-4">You've found the treasure!</h2>
@@ -195,3 +195,11 @@ export default function ProposalGame() {
     </div>
   );
 }
+
+
+// <button
+// onClick={() => setShowPopup(true)}
+// className="bg-yellow-500 p-4 rounded-lg shadow-lg hover:bg-yellow-600 transition-colors"
+// >
+// Open Treasure Chest
+// </button>
