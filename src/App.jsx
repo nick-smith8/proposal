@@ -84,15 +84,10 @@ export default function ProposalGame() {
 
   const handleArrowClick = (background) => {
     setBackground(background)
-
-    // setShowTreasure(newIndex === 2);
   };
 
   const CustomDialog = ({ isOpen, onClose, children }) => {
     if (!isOpen) return null;
-
-
-
 
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
