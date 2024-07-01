@@ -103,33 +103,34 @@ export default function ProposalGame() {
     );
   };
 
-  // if (stage === 0) {
-  //   return (
-  //     <div className="h-screen w-screen bg-gray-900 text-white flex flex-col items-center justify-center p-4">
-  //       <h1 className="text-4xl font-bold mb-8">Detective's Secret Case</h1>
-  //       <p className="text-lg mb-8 text-center max-w-md">
-  //         To unlock this case, you need to find the password. 
-  //         Here's a clue: It's the name of a famous young female detective. 
-  //         Two words, no spaces.
-  //       </p>
-  //       <form onSubmit={handlePasswordSubmit} className="w-full max-w-sm">
-  //         <input
-  //           type="text"
-  //           value={password}
-  //           onChange={(e) => setPassword(e.target.value)}
-  //           className="w-full px-4 py-2 rounded bg-gray-800 text-white mb-4"
-  //           placeholder="Enter password"
-  //         />
-  //         <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
-  //           Unlock Case
-  //         </button>
-  //       </form>
-  //     </div>
-  //   );
-  // }
+  if (stage === 0) {
+    return (
+      <>
+        <div className="h-screen w-screen bg-gray-900 text-white flex flex-col items-center justify-center p-4">
+          <h1 className="text-4xl font-bold mb-8">There's a mystery afoot that only a true detective can solve.</h1>
+          <p className="text-lg mb-8 text-center max-w-md">
+            To unlock this case, you need to find the password.
+            Seek the furry friend who purrs with delight, for on their coat, your clue hides in plain sight.
+          </p>
+          <form onSubmit={handlePasswordSubmit} className="w-full max-w-sm">
+            <input
+              type="text"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-2 rounded bg-gray-800 text-white mb-4"
+              placeholder="Enter password"
+            />
+            <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+              Unlock Case
+            </button>
+          </form>
+          <footer className='min-h-[50px] fixed bottom-4'>&copy; Nick Interactive</footer>
+        </div>
+      </>
 
-  console.log(background.image)
-  console.log(foundTools)
+
+    );
+  }
 
   if (background.image == '/upstairs_left_final.png' && visitedFinal === false) {
     setVisitedFinal(true)
@@ -182,7 +183,7 @@ export default function ProposalGame() {
         <div className='fixed top-4 right-4'>
           <button onClick={() => {
             setFoundTools(true)
-            alert('Any sleuth worth their salt would have tools. I would start by investigating this room.')
+            alert('Any sleuth worth their salt would have tools. I would start by investigating this room. IRL')
           }} className=" text-white p-2 bg-black bg-opacity-50 rounded-full">
             <SearchCheck size={100} />
           </button>
@@ -201,7 +202,7 @@ export default function ProposalGame() {
 
       )}
       <CustomDialog isOpen={showPopup} onClose={() => setShowPopup(false)}>
-        <h2 className="text-2xl font-bold mb-4">You've solved the mystery!</h2>
+        <h2 className="text-2xl font-bold mb-4">You've solved the mystery in this area! but...</h2>
         <p className="mb-4">
           Go to the place where we unexpectedly stayed for a year during that unique 2020 year.
         </p>
