@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowUp, ArrowLeft, ArrowRight, ArrowDown, SearchCheck, X } from 'lucide-react';
-
-
+import { ArrowUp, ArrowLeft, ArrowRight, ArrowDown, SearchCheck, Heart, X } from 'lucide-react';
 
 let upstairs_left_final = {
   image: '/upstairs_left_final.png',
@@ -72,6 +70,9 @@ export default function ProposalGame() {
   const [stage, setStage] = useState(0);
   const [background, setBackground] = useState(main_landing);
   const [showTreasure, setShowTreasure] = useState(false);
+  const [foundTools, setFoundTools] = useState(false);
+  const [visitedFinal, setVisitedFinal] = useState(false);
+
   const [showPopup, setShowPopup] = useState(false);
 
   const handlePasswordSubmit = (e) => {
@@ -133,6 +134,11 @@ export default function ProposalGame() {
   // }
 
   console.log(background.image)
+  console.log(foundTools)
+
+  if (background.image == '/upstairs_left_final.png' && visitedFinal === false) {
+    setVisitedFinal(true)
+  }
 
   return (
     <div
@@ -177,19 +183,32 @@ export default function ProposalGame() {
           </button>
         </div>
       }
-      {background.image == '/downstairs_left_final.png' && (
+      {visitedFinal && background.image == '/downstairs_left_final.png' && (
         <div className='fixed top-4 right-4'>
-          <button onClick={() => alert('Any sleuth worth their salt would have tools. I would start by investigating this room.')} className=" text-white p-2 bg-black bg-opacity-50 rounded-full">
+          <button onClick={() => {
+            setFoundTools(true)
+            alert('Any sleuth worth their salt would have tools. I would start by investigating this room.')
+          }} className=" text-white p-2 bg-black bg-opacity-50 rounded-full">
             <SearchCheck size={100} />
           </button>
         </div>
 
       )}
+
+      {background.image == '/upstairs_left_final.png' && (
+        <button
+          disabled={!foundTools}
+          onClick={() => setShowPopup(true)}
+          className="bg-yellow-500 p-4 rounded-lg shadow-lg hover:bg-yellow-600 transition-colors"
+        >
+          {!foundTools ? 'Hmm you will need true detective tools to access this.  Keep looking' : 'Wow you are a true sleuth!'}
+        </button>
+
+      )}
       <CustomDialog isOpen={showPopup} onClose={() => setShowPopup(false)}>
-        <h2 className="text-2xl font-bold mb-4">You've found the treasure!</h2>
+        <h2 className="text-2xl font-bold mb-4">You've solved the mystery!</h2>
         <p className="mb-4">
-          Congratulations! You've solved the mystery and found the ring.
-          Will you marry me?
+          Go to the place where we unexpectedly stayed for a year during that unique 2020 year.
         </p>
       </CustomDialog>
     </div>
@@ -197,9 +216,3 @@ export default function ProposalGame() {
 }
 
 
-// <button
-// onClick={() => setShowPopup(true)}
-// className="bg-yellow-500 p-4 rounded-lg shadow-lg hover:bg-yellow-600 transition-colors"
-// >
-// Open Treasure Chest
-// </button>
