@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { ArrowUp, ArrowLeft, ArrowRight, X } from 'lucide-react';
+import { ArrowUp, ArrowLeft, ArrowRight, ArrowDown, X } from 'lucide-react';
 
 const backgrounds = [
-  '/api/placeholder/1920/1080',
+  '/main_entrance.png',
   '/api/placeholder/1920/1080',
   '/api/placeholder/1920/1080',
   '/api/placeholder/1920/1080',
@@ -35,6 +35,9 @@ export default function ProposalGame() {
       case 'up':
         newIndex = (backgroundIndex + 2) % backgrounds.length;
         break;
+      case 'down':
+        newIndex = (backgroundIndex + 3) % backgrounds.length;
+        break;
     }
     setBackgroundIndex(newIndex);
     setShowTreasure(newIndex === 2);
@@ -57,49 +60,57 @@ export default function ProposalGame() {
     );
   };
 
-  if (stage === 0) {
-    return (
-      <div className="h-screen w-screen bg-gray-900 text-white flex flex-col items-center justify-center p-4">
-        <h1 className="text-4xl font-bold mb-8">Detective's Secret Case</h1>
-        <p className="text-lg mb-8 text-center max-w-md">
-          To unlock this case, you need to find the password. 
-          Here's a clue: It's the name of a famous young female detective. 
-          Two words, no spaces.
-        </p>
-        <form onSubmit={handlePasswordSubmit} className="w-full max-w-sm">
-          <input
-            type="text"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 rounded bg-gray-800 text-white mb-4"
-            placeholder="Enter password"
-          />
-          <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
-            Unlock Case
-          </button>
-        </form>
-      </div>
-    );
-  }
+  // if (stage === 0) {
+  //   return (
+  //     <div className="h-screen w-screen bg-gray-900 text-white flex flex-col items-center justify-center p-4">
+  //       <h1 className="text-4xl font-bold mb-8">Detective's Secret Case</h1>
+  //       <p className="text-lg mb-8 text-center max-w-md">
+  //         To unlock this case, you need to find the password. 
+  //         Here's a clue: It's the name of a famous young female detective. 
+  //         Two words, no spaces.
+  //       </p>
+  //       <form onSubmit={handlePasswordSubmit} className="w-full max-w-sm">
+  //         <input
+  //           type="text"
+  //           value={password}
+  //           onChange={(e) => setPassword(e.target.value)}
+  //           className="w-full px-4 py-2 rounded bg-gray-800 text-white mb-4"
+  //           placeholder="Enter password"
+  //         />
+  //         <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+  //           Unlock Case
+  //         </button>
+  //       </form>
+  //     </div>
+  //   );
+  // }
+
+  console.log(backgrounds[backgroundIndex])
 
   return (
     <div 
-      className="h-screen bg-cover bg-center flex items-center justify-center"
+      className="h-screen w-screen bg-cover bg-center flex items-center justify-center"
       style={{ backgroundImage: `url(${backgrounds[backgroundIndex]})` }}
     >
-      <div className="fixed top-4 left-4">
+      <div className="fixed top-1/2 left-4">
         <button onClick={() => handleArrowClick('left')} className="text-white p-2 bg-black bg-opacity-50 rounded-full">
           <ArrowLeft size={24} />
         </button>
       </div>
-      <div className="fixed top-4 right-4">
+      <div className="fixed top-1/2 right-4">
         <button onClick={() => handleArrowClick('right')} className="text-white p-2 bg-black bg-opacity-50 rounded-full">
           <ArrowRight size={24} />
         </button>
       </div>
-      <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2">
+      <div className="fixed top-4 left-1/2 transform -translate-x-1/2">
         <button onClick={() => handleArrowClick('up')} className="text-white p-2 bg-black bg-opacity-50 rounded-full">
           <ArrowUp size={24} />
+        </button>
+      </div>
+
+      <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2">
+        <button onClick={() => handleArrowClick('up')} className="text-white p-2 bg-black bg-opacity-50 rounded-full">
+          <ArrowDown size={24} />
         </button>
       </div>
       {showTreasure && (
