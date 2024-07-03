@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ArrowUp, ArrowLeft, ArrowRight, ArrowDown, SearchCheck, Heart, X } from 'lucide-react';
+import { ArrowUp, ArrowLeft, ArrowRight, ArrowDown, SearchCheck, Gem, X } from 'lucide-react';
+import { ReactTyped } from "react-typed";
 
 let upstairs_left_final = {
   image: '/upstairs_left_final.png',
@@ -77,7 +78,7 @@ export default function ProposalGame() {
 
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
-    if (password.toLowerCase() === 'nancy drew') {
+    if (password.toLowerCase() === 'nancydrew1') {
       setStage(1);
     }
   };
@@ -85,6 +86,7 @@ export default function ProposalGame() {
   const handleArrowClick = (background) => {
     setBackground(background)
   };
+
 
   const CustomDialog = ({ isOpen, onClose, children }) => {
     if (!isOpen) return null;
@@ -107,11 +109,12 @@ export default function ProposalGame() {
     return (
       <>
         <div className="h-screen w-screen bg-gray-900 text-white flex flex-col items-center justify-center p-4">
-          <h1 className="text-4xl font-bold mb-8">There's a mystery afoot that only a true detective can solve.</h1>
-          <p className="text-lg mb-8 text-center max-w-md">
-            To unlock this case, you need to find the password.
-            Seek the furry friend who purrs with delight, for on their coat, your clue hides in plain sight.
-          </p>
+          <img src="/xenia.png" width={300} />
+          <div className='text-center max-w-[400px]'>
+            <ReactTyped strings={["I've moved on from stealing art to something far more valuable! No one will be able to find what I've taken. Muahaha! To unlock this case, you need to find the password.  Seek the furry friend who purrs with delight, for on their coat, your clue hides in plain sight."]} typeSpeed={100} />
+          </div>
+
+
           <form onSubmit={handlePasswordSubmit} className="w-full max-w-sm">
             <input
               type="text"
@@ -183,7 +186,7 @@ export default function ProposalGame() {
         <div className='fixed top-4 right-4'>
           <button onClick={() => {
             setFoundTools(true)
-            alert('Any sleuth worth their salt would have tools. I would start by investigating this room. IRL')
+            alert('Any sleuth worth their salt would have tools. I would start by investigating this room. IRL.  There are 4 tools you need to find')
           }} className=" text-white p-2 bg-black bg-opacity-50 rounded-full">
             <SearchCheck size={100} />
           </button>
@@ -197,12 +200,13 @@ export default function ProposalGame() {
           onClick={() => setShowPopup(true)}
           className="bg-yellow-500 p-4 rounded-lg shadow-lg hover:bg-yellow-600 transition-colors"
         >
-          {!foundTools ? 'Hmm you will need true detective tools to access this.  Keep looking' : 'Wow you are a true sleuth!'}
+          {!foundTools ? 'Hmm you will need true detective tools to access this.  Keep looking' : ''}
+          <Gem size={100} />
         </button>
 
       )}
       <CustomDialog isOpen={showPopup} onClose={() => setShowPopup(false)}>
-        <h2 className="text-2xl font-bold mb-4">You've solved the mystery in this area! but...</h2>
+        <h2 className="text-2xl font-bold mb-4">Wow you are a true sleuth! You've solved the mystery in this area! but...</h2>
         <p className="mb-4">
           Go to the place where we unexpectedly stayed for a year during that unique 2020 year.
         </p>
