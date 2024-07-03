@@ -201,14 +201,14 @@ export default function ProposalGame() {
           className="bg-yellow-500 p-4 rounded-lg shadow-lg hover:bg-yellow-600 transition-colors"
         >
           {!foundTools ? 'Hmm you will need true detective tools to access this.  Keep looking' : ''}
-          <Gem size={100} />
+          {foundTools && <Gem size={100} />}
         </button>
 
       )}
       <CustomDialog isOpen={showPopup} onClose={() => setShowPopup(false)}>
-        <h2 className="text-2xl font-bold mb-4">Wow you are a true sleuth! You've solved the mystery in this area! but...</h2>
+        <h2 className="text-2xl font-bold mb-4">Wow you are a true sleuth! You've discovered what Xenia took virtually, but you need to keep searching... </h2>
         <p className="mb-4">
-          Go to the place where we unexpectedly stayed for a year during that unique 2020 year.
+          Go to the place where we unexpectedly stayed during that unique 2020 year.
         </p>
       </CustomDialog>
     </div>
