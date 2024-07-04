@@ -60,11 +60,11 @@ upstairs_right_final.down = upstairs_landing
 main_right_final.down = main_landing
 main_left_final.down = main_landing
 
-downstairs_right_final = downstairs_landing
+downstairs_right_final.down = downstairs_landing
 downstairs_left_final.down = downstairs_landing
 
 upstairs_landing.down = main_landing
-downstairs_left_final.down = main_landing
+downstairs_left_final.down = downstairs_landing
 
 export default function ProposalGame() {
   const [password, setPassword] = useState('');
@@ -111,7 +111,7 @@ export default function ProposalGame() {
         <div className="h-screen w-screen bg-gray-900 text-white flex flex-col items-center justify-center p-4">
           <img src="/xenia.png" width={300} />
           <div className='text-center max-w-[400px]'>
-            <ReactTyped strings={["I've moved on from stealing art to something far more valuable! No one will be able to find what I've taken. Muahaha! To unlock this case, you need to find the password.  Seek the furry friend who purrs with delight, for on their coat, your clue hides in plain sight."]} typeSpeed={100} />
+            <ReactTyped strings={["I've moved on from stealing art to something far more valuable! No one will be able to find what I've taken. Muahaha! To unlock this case, you need to find the password.  Seek the furry friend who purrs with delight, for on their coat, your clue hides in plain sight."]} typeSpeed={75} />
           </div>
 
 
