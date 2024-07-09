@@ -15,3 +15,14 @@ Flow of the game:
 Vite + react(javascript - no one has time to deal with types for a project like this )
 
 Claude - Will be utilizing the AI overlords to see what they have to offer on assitance for this
+
+
+# Update
+
+She said yes!!!
+
+
+# Walkthrough
+
+
+https://www.loom.com/share/d937b13221604314a84b26c307496f43
